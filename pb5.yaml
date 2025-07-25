@@ -1,0 +1,23 @@
+---
+- name: create the user account if the account is already present then change the password
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+   - name: create a user account
+     user:
+      name: gangadhar
+      password: 1122344
+      home: /home/gangadhar
+      shell: /bin/bash
+     register: output
+   - name: print the logs
+     debug:
+      var: output
+   - name: change the password
+     user:
+      name: gangadhar
+      password: 10101010
+     when:
+      output.changed==false
+...
