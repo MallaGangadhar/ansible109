@@ -1,23 +1,23 @@
 ---
-- name: create the user account if the account is already present then change the password
-  hosts: all
+- name: playbook to install git, maven, tree, java, elinks in all target nodes
+  hosts: valid
   become: true
   gather_facts: false
   tasks:
    - name: create a user account
      user:
-      name: gangadhar
-      password: 1122344
-      home: /home/gangadhar
+      name: Ganga
+      password: 11223344
+      home: /home/Ganga
       shell: /bin/bash
      register: output
-   - name: print the logs
-     debug:
+   - name: print the output
+     debug: 
       var: output
-   - name: change the password
+   - name:  change the password if the account was already present
      user:
-      name: gangadhar
-      password: 10101010
+      name: Ganga
+      password: 00001111
      when:
-      output.changed==false
+      output.changed== false
 ...
